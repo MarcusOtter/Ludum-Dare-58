@@ -6,9 +6,28 @@ public class ScaleWithDistanceToTarget : MonoBehaviour
     [SerializeField] private float scaleMultiplier = 0.25f;
     [SerializeField] private float maxScale = 2f;
     
+    [SerializeField] private float scaleUpSpeed = 25f;
+    [SerializeField] private float scaleDownSpeed = 50f;
+    
     private void Update()
     {
-        var newScale = Vector3.Magnitude(target.position - transform.position) * scaleMultiplier;
-        transform.localScale = transform.localScale.With(x: Mathf.Min(newScale, maxScale));
+        var newScale = target
+            ? Vector3.Magnitude(target.position - transform.position) * scaleMultiplier
+            : 1;
+        var targetScale = Mathf.Min(newScale, maxScale);
+        var speed = target ? scaleUpSpeed : scaleDownSpeed;
+        var scaleThisFrame = Mathf.MoveTowards(transform.localScale.x, targetScale, speed * Time.deltaTime);
+        
+        transform.localScale = transform.localScale.With(x: scaleThisFrame);
+    }
+
+    public void SetTarget(Transform newTarget)
+    {
+        target = newTarget;
+    }
+
+    public void ClearTarget()
+    {
+        target = null;
     }
 }
