@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Collider))]
 public class Hand : MonoBehaviour
 {
-    public Transform player;
+    public Player player;
     
     internal bool IsInJail = true;
     internal bool IsHoldingItem => _heldPickable;
@@ -26,6 +26,12 @@ public class Hand : MonoBehaviour
     
     private void Update()
     {
+        if (player && player.IsStunned)
+        {
+            _isPressed = false;
+            return;
+        }
+        
         _isPressed = _useHandAction.IsPressed();
         
         if (_useHandAction.WasPressedThisFrame())
@@ -35,10 +41,31 @@ public class Hand : MonoBehaviour
 
         if (_useHandAction.WasReleasedThisFrame())
         {
-            onHandReleased?.Invoke();
-            _heldPickable?.Drop();
-            _heldPickable = null;
+            DropItem();
         }
+    }
+
+    public void DropItem()
+    {
+        onHandReleased?.Invoke();
+        _heldPickable?.Drop();
+        _heldPickable = null;
+    }
+    
+    private void TryPickUp(Collider other)
+    {
+        if (!_isPressed || _heldPickable)
+        {
+            return;
+        }
+
+        if (!other.TryGetComponent<Pickable>(out var pickable))
+        {
+            return;
+        }
+        
+        pickable.PickUp(transform);
+        _heldPickable = pickable;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,21 +84,5 @@ public class Hand : MonoBehaviour
         {
             IsInJail = false;
         }
-    }
-
-    private void TryPickUp(Collider other)
-    {
-        if (!_isPressed || _heldPickable)
-        {
-            return;
-        }
-
-        if (!other.TryGetComponent<Pickable>(out var pickable))
-        {
-            return;
-        }
-        
-        pickable.PickUp(transform);
-        _heldPickable = pickable;
     }
 }

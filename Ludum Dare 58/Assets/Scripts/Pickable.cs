@@ -1,10 +1,10 @@
-using System;
 using UnityEngine;
 
 public class Pickable : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Collider coll;
+    
     private Transform _target;
     
     private void Update()
