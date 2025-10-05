@@ -15,7 +15,9 @@ public class Visitor : MonoBehaviour
     
     [Header("Detection settings")]
     [SerializeField] private float timeUntilDetected = 2f;
-    [SerializeField] private float delayUntilUndetected = 1f;
+    [SerializeField] private float timeUntilResumeAfterDetected = 3f;
+    [SerializeField] private float detectionMultiplierIfHoldingItem = 2f;
+    [SerializeField] private float detectionCooldownMultiplier = 0.5f;
     [SerializeField] private AnimationCurve detectionConeScaleX;
     [SerializeField] private AnimationCurve detectionConeScaleZ;
     [SerializeField] private Gradient detectionConeColor;
@@ -24,19 +26,22 @@ public class Visitor : MonoBehaviour
     [SerializeField] private UnityEvent onDetected;
     
     private NavMeshAgent _agent;
-    private Hand _detectedHand;
+    private Hand _seenHand;
     private MeshRenderer _detectionConeRenderer;
+    private Player _player;
     
     private Vector3[] _wayPoints;
     private int _currentWaypointIndex;
     private float _waitTimer;
-    private float _timeCaught;
+    private float _timeSeen;
+    private bool _isDetected;
     
-    private float DetectionMeter => Mathf.Clamp01(_timeCaught / timeUntilDetected);
+    private float DetectionMeter => Mathf.Clamp01(_timeSeen / timeUntilDetected);
     
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
+        _player = FindFirstObjectByType<Player>();
         _detectionConeRenderer = detectionCone.GetComponentInChildren<MeshRenderer>();
         UpdateDetectionBehavior();
 
@@ -69,32 +74,38 @@ public class Visitor : MonoBehaviour
         var newScaleZ = detectionConeScaleZ.Evaluate(DetectionMeter);
         detectionCone.localScale = detectionCone.localScale.With(x: newScaleX, z: newScaleZ);
 
-        if (!_detectedHand)
+        if (_isDetected)
         {
             return;
         }
         
-        // Caught
-        if (_timeCaught >= timeUntilDetected)
+        if (!_seenHand || _seenHand.IsInJail)
+        {
+            _timeSeen = Mathf.Max(_timeSeen - Time.deltaTime * detectionCooldownMultiplier, 0);
+            return;
+        }
+        
+        if (!_seenHand.IsInJail)
+        {
+            _timeSeen += _seenHand.IsHoldingItem ? Time.deltaTime * detectionMultiplierIfHoldingItem : Time.deltaTime;
+        }
+        
+        if (_timeSeen >= timeUntilDetected)
         {
             _agent.isStopped = true;
-            _agent.transform.forward = (_detectedHand.player.position - transform.position).With(y: 0);
+            _agent.transform.forward = (_player.transform.position - transform.position).With(y: 0);
+            _seenHand.DropItem();
+            _player.SetStunned(true);
             onDetected?.Invoke();
-            return;
+            _isDetected = true;
+            this.SetTimeout(timeUntilResumeAfterDetected, () =>
+            {
+                _isDetected = false;
+                _agent.isStopped = false;
+                _timeSeen = 0;
+                _player.SetStunned(false);
+            });
         }
-        
-        if (_detectedHand.IsInJail)
-        {
-            _timeCaught = 0;
-            return;
-        }
-        
-        if (!_detectedHand.IsInJail)
-        {
-            _timeCaught += Time.deltaTime;
-        }
-
-
     }
     
     private void UpdateWaypoints()
@@ -148,7 +159,7 @@ public class Visitor : MonoBehaviour
             return;
         }
         
-        _detectedHand = hand;
+        _seenHand = hand;
     }
 
     private void OnTriggerExit(Collider other)
@@ -158,6 +169,6 @@ public class Visitor : MonoBehaviour
             return;
         }
 
-        _detectedHand = null;
+        _seenHand = null;
     }
 }
