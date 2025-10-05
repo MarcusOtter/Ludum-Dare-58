@@ -128,6 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowTarget
   target: {fileID: 4321201476836866835}
+  positionOffset: {x: 0, y: 0, z: 0}
   followPosition: 1
   followRotation: 0
   followScale: 0
@@ -144,6 +145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pickable
   rb: {fileID: 8992182202898743072}
+  coll: {fileID: 3337683058330321584}
 --- !u!1 &2668947601496646772
 GameObject:
   m_ObjectHideFlags: 0

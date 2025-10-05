@@ -3,7 +3,7 @@ using UnityEngine;
 public class FollowTarget : MonoBehaviour
 {
     [SerializeField] private Transform target;
-    
+    [SerializeField] private Vector3 positionOffset = Vector3.zero;
     [SerializeField] private bool followPosition = true;
     [SerializeField] private bool followRotation;
     [SerializeField] private bool followScale;
@@ -17,7 +17,7 @@ public class FollowTarget : MonoBehaviour
 
         if (followPosition)
         {
-            transform.position = target.position;
+            transform.position = target.position + positionOffset;
         }
 
         if (followRotation)

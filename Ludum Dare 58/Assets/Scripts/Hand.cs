@@ -5,13 +5,19 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Collider))]
 public class Hand : MonoBehaviour
 {
+    public Transform player;
+    
+    internal bool IsInJail = true;
+    internal bool IsHoldingItem => _heldPickable;
+    
+    [SerializeField] private Collider insideJailTrigger;
     [SerializeField] private UnityEvent onHandPressed;
     [SerializeField] private UnityEvent onHandReleased;
 
     private InputAction _useHandAction;
     private Pickable _heldPickable;
-    
-    private bool isPressed = false;
+
+    private bool _isPressed;
     
     private void Awake()
     {
@@ -20,7 +26,7 @@ public class Hand : MonoBehaviour
     
     private void Update()
     {
-        isPressed = _useHandAction.IsPressed();
+        _isPressed = _useHandAction.IsPressed();
         
         if (_useHandAction.WasPressedThisFrame())
         {
@@ -37,7 +43,25 @@ public class Hand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!isPressed || _heldPickable)
+        TryPickUp(other);
+
+        if (other == insideJailTrigger)
+        {
+            IsInJail = true;
+        }
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        if (other == insideJailTrigger)
+        {
+            IsInJail = false;
+        }
+    }
+
+    private void TryPickUp(Collider other)
+    {
+        if (!_isPressed || _heldPickable)
         {
             return;
         }
