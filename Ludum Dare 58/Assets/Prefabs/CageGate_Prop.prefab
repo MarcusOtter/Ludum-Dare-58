@@ -95,11 +95,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 240546a09d5f51146b549171dfcf8f39, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 01829c4b95d627240b5c25ca6e207a90, type: 2}
+      objectReference: {fileID: 2100000, guid: d63facdeb650f4440bb15797cb59293f, type: 2}
     - target: {fileID: -5162831595963022849, guid: 240546a09d5f51146b549171dfcf8f39, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 01829c4b95d627240b5c25ca6e207a90, type: 2}
+      objectReference: {fileID: 2100000, guid: d63facdeb650f4440bb15797cb59293f, type: 2}
     - target: {fileID: 919132149155446097, guid: 240546a09d5f51146b549171dfcf8f39, type: 3}
       propertyPath: m_Name
       value: CageGate_Mesh
