@@ -5,13 +5,18 @@ using UnityEngine.Events;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Visitor : MonoBehaviour
 {
+    public ItemType HeldItem { get; private set; } = ItemType.None;
+    
     [Header("References")]
     [SerializeField] private Transform detectionCone;
     [SerializeField] private Transform exclamationPoint;
+    [SerializeField] private Transform pocketSlot;
     
     [Header("Path settings")]
     [SerializeField] private Transform path;
     [SerializeField] private Vector2 waitTimeRange = new(2, 5);
+    [SerializeField] private bool pickRandomWaypoint;
+    [SerializeField] private Vector2Int agentPriorityRange = new (20, 100); 
     
     [Header("Detection settings")]
     [SerializeField] private float timeUntilDetected = 2f;
@@ -21,9 +26,6 @@ public class Visitor : MonoBehaviour
     [SerializeField] private AnimationCurve detectionConeScaleX;
     [SerializeField] private AnimationCurve detectionConeScaleZ;
     [SerializeField] private Gradient detectionConeColor;
-
-    [Header("Events")]
-    [SerializeField] private UnityEvent onDetected;
     
     private NavMeshAgent _agent;
     private Hand _seenHand;
@@ -43,6 +45,8 @@ public class Visitor : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _player = FindFirstObjectByType<Player>();
         _detectionConeRenderer = detectionCone.GetComponentInChildren<MeshRenderer>();
+        
+        _agent.avoidancePriority = Random.Range(agentPriorityRange.x, agentPriorityRange.y);
         UpdateDetectionBehavior();
 
         if (!path)
@@ -57,14 +61,43 @@ public class Visitor : MonoBehaviour
             _wayPoints[i] = child.position;
             i++;
         }
-        
-        transform.position = _wayPoints[0];
+
+        if (pickRandomWaypoint)
+        {
+            transform.position = _wayPoints[Random.Range(0, _wayPoints.Length)];   
+        }
+        else
+        {
+            transform.position = _wayPoints[0];
+        }
     }
     
     private void Update()
     {
         UpdateDetectionBehavior();
         UpdateWaypoints();
+    }
+
+    public void SpawnAndHoldItem(Item item)
+    {
+        if (HeldItem != ItemType.None)
+        {
+            return;
+        }
+
+        if (HeldItem == item.type)
+        {
+            return;
+        }
+
+        var spawnedItem = Instantiate(item.prefab);
+        spawnedItem.PickUp(pocketSlot);
+        HeldItem = item.type;
+    }
+
+    public void NotifyItemWasStolen()
+    {
+        HeldItem = ItemType.None;
     }
 
     private void UpdateDetectionBehavior()
@@ -96,7 +129,7 @@ public class Visitor : MonoBehaviour
             _agent.transform.forward = (_player.transform.position - transform.position).With(y: 0);
             _seenHand.DropItem();
             _player.SetStunned(true);
-            onDetected?.Invoke();
+            _player.TakeDamage(1);
             _isDetected = true;
             this.SetTimeout(timeUntilResumeAfterDetected, () =>
             {
@@ -120,8 +153,16 @@ public class Visitor : MonoBehaviour
             _waitTimer -= Time.deltaTime;
             return;
         }
+
+        if (pickRandomWaypoint)
+        {
+            _currentWaypointIndex = Random.Range(0, _wayPoints.Length);
+        }
+        else
+        {
+            _currentWaypointIndex = (_currentWaypointIndex + 1) % _wayPoints.Length;
+        }
         
-        _currentWaypointIndex = (_currentWaypointIndex + 1) % _wayPoints.Length;
         _agent.SetDestination(_wayPoints[_currentWaypointIndex]);
         _waitTimer = Random.Range(waitTimeRange.x, waitTimeRange.y);
     }

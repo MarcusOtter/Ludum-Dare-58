@@ -59,7 +59,8 @@ public class Hand : MonoBehaviour
             return;
         }
 
-        if (!other.TryGetComponent<Pickable>(out var pickable))
+        var pickable = other.GetComponentInParent<Pickable>();
+        if (!pickable)
         {
             return;
         }

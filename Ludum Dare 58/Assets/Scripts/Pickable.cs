@@ -19,6 +19,12 @@ public class Pickable : MonoBehaviour
 
     public void PickUp(Transform parent)
     {
+        if (_target)
+        {
+            var visitor = _target.GetComponentInParent<Visitor>();
+            visitor.NotifyItemWasStolen();
+        }
+        
         _target = parent;
         rb.isKinematic = true;
         coll.enabled = false;
