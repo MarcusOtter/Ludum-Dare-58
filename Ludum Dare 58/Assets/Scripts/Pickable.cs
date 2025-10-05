@@ -2,8 +2,11 @@ using UnityEngine;
 
 public class Pickable : MonoBehaviour
 {
+    public Item Item => item;
+    
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Collider coll;
+    [SerializeField] private Item item;
     
     private Transform _target;
     

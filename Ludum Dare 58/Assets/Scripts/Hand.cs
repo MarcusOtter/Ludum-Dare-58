@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,13 +10,14 @@ public class Hand : MonoBehaviour
     
     internal bool IsInJail = true;
     internal bool IsHoldingItem => _heldPickable;
+    internal ItemType HeldItemType => _heldPickable?.Item.type ?? ItemType.None;
     
     [SerializeField] private Collider insideJailTrigger;
     [SerializeField] private UnityEvent onHandPressed;
     [SerializeField] private UnityEvent onHandReleased;
 
     private InputAction _useHandAction;
-    private Pickable _heldPickable;
+    [CanBeNull] private Pickable _heldPickable;
 
     private bool _isPressed;
     
@@ -45,11 +47,14 @@ public class Hand : MonoBehaviour
         }
     }
 
-    public void DropItem()
+    public Pickable DropItem()
     {
+        var pickableToReturn = _heldPickable;
         onHandReleased?.Invoke();
         _heldPickable?.Drop();
         _heldPickable = null;
+        
+        return pickableToReturn;
     }
     
     private void TryPickUp(Collider other)

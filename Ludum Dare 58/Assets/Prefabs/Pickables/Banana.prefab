@@ -292,3 +292,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Pickable
   rb: {fileID: 8992182202898743072}
   coll: {fileID: 3337683058330321584}
+  item: {fileID: 11400000, guid: fb81b9c778b6a5642b00ed071e64d189, type: 2}

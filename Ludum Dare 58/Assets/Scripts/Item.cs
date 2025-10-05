@@ -13,4 +13,5 @@ public class Item : ScriptableObject
     public ItemType type;
     public int spawnWeight;
     public Pickable prefab;
+    public Texture icon;
 }
