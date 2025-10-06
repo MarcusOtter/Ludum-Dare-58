@@ -3635,19 +3635,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc51ef13ad07f545b5773cece205ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VisitorSpawner
-  minimumSpawnDelay: 2
+  minimumSpawnDelay: 0.5
   visitorCountTarget:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 1
-      inSlope: 0.04556444
-      outSlope: 0.04556444
+      inSlope: 0.029160688
+      outSlope: 0.029160688
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.38383448
+      outWeight: 0.16679534
     - serializedVersion: 3
       time: 300
       value: 8

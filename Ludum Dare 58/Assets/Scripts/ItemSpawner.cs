@@ -13,8 +13,7 @@ public class ItemSpawner : MonoBehaviour
     
     private void Awake()
     {
-        // NOTE: New visitors will have to be added here later if we choose to spawn more visitors dynamically
-        _visitors = FindObjectsByType<Visitor>(FindObjectsSortMode.None);
+        _visitors = FindObjectsByType<Visitor>(FindObjectsInactive.Include, FindObjectsSortMode.None);
         _camera = Camera.main;
     }
 
@@ -30,7 +29,7 @@ public class ItemSpawner : MonoBehaviour
     // ReSharper disable Unity.PerformanceAnalysis
     private void SpawnRandomItem()
     {
-        var offscreenVisitor = _visitors.FirstOrDefault(visitor => visitor.HeldItem == ItemType.None && !_camera.IsObjectVisible(visitor.transform));
+        var offscreenVisitor = _visitors.FirstOrDefault(visitor => visitor.isActiveAndEnabled && visitor.HeldItem == ItemType.None && !_camera.IsObjectVisible(visitor.transform));
         if (!offscreenVisitor)
         {
             return;
