@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: StandardVertexSoft_M
+  m_Name: VisitorShirt8M
   m_Shader: {fileID: -6465566751694194690, guid: f09ec2d69ca6c7641b962a92ca2c582f, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -64,7 +64,7 @@ Material:
     - _Shades: 0.4
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_Tint: {r: 1, g: 1, b: 1, a: 0}
+    - _Color_Tint: {r: 0.7735849, g: 0.7600315, b: 0.72614807, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
