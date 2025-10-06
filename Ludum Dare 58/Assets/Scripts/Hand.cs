@@ -8,7 +8,6 @@ public class Hand : MonoBehaviour
 {
     public Player player;
     
-    internal bool IsSafe = true;
     internal bool IsHoldingItem => _heldPickable;
     internal ItemType HeldItemType => _heldPickable?.Item.type ?? ItemType.None;
     
@@ -76,27 +75,5 @@ public class Hand : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         TryPickUp(other);
-
-        if (other.CompareTag("Safe"))
-        {
-            IsSafe = true;
-        }
-    }
-    
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.CompareTag("Safe"))
-        {
-            IsSafe = true;
-        }
-    }
-
-    
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Safe"))
-        {
-            IsSafe = false;
-        }
     }
 }

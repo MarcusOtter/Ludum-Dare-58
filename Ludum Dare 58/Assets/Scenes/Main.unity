@@ -553,6 +553,7 @@ GameObject:
   - component: {fileID: 241802474}
   - component: {fileID: 241802475}
   - component: {fileID: 241802478}
+  - component: {fileID: 241802481}
   - component: {fileID: 241802479}
   - component: {fileID: 241802480}
   m_Layer: 0
@@ -686,6 +687,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
+--- !u!114 &241802481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 241802473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36210ba80979c134f9080cc367bbdf67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPart
 --- !u!1 &260773215
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1203,7 @@ GameObject:
   - component: {fileID: 512910444}
   - component: {fileID: 512910443}
   - component: {fileID: 512910442}
+  - component: {fileID: 512910445}
   m_Layer: 0
   m_Name: Arm collider
   m_TagString: Player
@@ -1292,6 +1306,18 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 512910440}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &512910445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 512910440}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36210ba80979c134f9080cc367bbdf67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerPart
 --- !u!1 &533771576
 GameObject:
   m_ObjectHideFlags: 0
@@ -4579,13 +4605,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: MONKEY_Prop
       objectReference: {fileID: 0}
-    - target: {fileID: 398755479116375297, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
-      propertyPath: m_TagString
-      value: Player
+    - target: {fileID: 4842890475371290573, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
+      propertyPath: m_Height
+      value: 2.1
       objectReference: {fileID: 0}
-    - target: {fileID: 2926355618171986750, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 4842890475371290573, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
+      propertyPath: m_Center.y
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 5897836084183762945, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4627,17 +4653,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7501111436304646221, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 398755479116375297, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2069000660}
+      addedObject: {fileID: 2069000662}
   m_SourcePrefab: {fileID: 100100000, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
 --- !u!4 &2069000658 stripped
 Transform:
@@ -4649,7 +4671,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 398755479116375297, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
   m_PrefabInstance: {fileID: 2069000657}
   m_PrefabAsset: {fileID: 0}
---- !u!136 &2069000660
+--- !u!136 &2069000662
 CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4664,14 +4686,14 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1
-  m_Height: 2
+  m_Height: 2.1
   m_Direction: 1
-  m_Center: {x: 0, y: 1, z: -0.3}
+  m_Center: {x: 0, y: 1.05, z: -0.3}
 --- !u!4 &2073625606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5384669924501276662, guid: e43bdfdff1aa85b43bbd4ae5adf5d45c, type: 3}

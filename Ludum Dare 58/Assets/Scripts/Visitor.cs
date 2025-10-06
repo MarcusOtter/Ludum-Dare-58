@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -30,13 +32,13 @@ public class Visitor : MonoBehaviour
     private MeshRenderer _detectionConeRenderer;
     private Player _player;
     private Hand _hand;
+    private HashSet<PlayerPart> _detectedParts = new();
     
     private Vector3[] _wayPoints;
     private int _currentWaypointIndex;
     private float _waitTimer;
     private float _timeSeen;
     private bool _isDetected;
-    private bool _isSeeingPlayer;
     
     private float DetectionMeter => Mathf.Clamp01(_timeSeen / timeUntilDetected);
     
@@ -113,13 +115,13 @@ public class Visitor : MonoBehaviour
             return;
         }
         
-        if (!_isSeeingPlayer || _hand.IsSafe)
+        if (!_detectedParts.Any() || _detectedParts.All(part => part.IsSafe))
         {
             _timeSeen = Mathf.Max(_timeSeen - Time.deltaTime * detectionCooldownMultiplier, 0);
             return;
         }
         
-        if (!_hand.IsSafe)
+        if (_detectedParts.Any(part => !part.IsSafe))
         {
             _timeSeen += _hand.IsHoldingItem ? Time.deltaTime * detectionMultiplierIfHoldingItem : Time.deltaTime;
         }
@@ -131,6 +133,7 @@ public class Visitor : MonoBehaviour
             _hand.DropItem();
             _player.SetStunned(true);
             _player.TakeDamage(1);
+            _player.Respawn();
             _isDetected = true;
             this.SetTimeout(timeUntilResumeAfterDetected, () =>
             {
@@ -198,7 +201,13 @@ public class Visitor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _isSeeingPlayer = true;
+            var playerPart = other.GetComponent<PlayerPart>();
+            if (playerPart)
+            {
+                _detectedParts.Add(playerPart);
+            }
+
+            // print("detectedParts: " + string.Join(", ", _detectedParts.Select(x => $"{x.name} ({(x.IsSafe ? "safe" : "not safe")})")));
         }
     }
 
@@ -206,7 +215,13 @@ public class Visitor : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            _isSeeingPlayer = false;
+            var playerPart = other.GetComponent<PlayerPart>();
+            if (playerPart)
+            {
+                _detectedParts.Remove(playerPart);
+            }
+            
+            // print("detectedParts: " + string.Join(", ", _detectedParts.Select(x => $"{x.name} ({(x.IsSafe ? "safe" : "not safe")})")));
         }
     }
 }
