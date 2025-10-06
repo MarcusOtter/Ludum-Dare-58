@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -16,7 +18,9 @@ public class Player : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform healthUiContainer;
     [SerializeField] private GameObject heartUiPrefab;
+    [SerializeField] private GameObject gameOverUi;
 
+    private InputAction _restartAction;
     private Vector3 _startPosition;
     private float _lastTimeTakenDamage;
     
@@ -30,11 +34,18 @@ public class Player : MonoBehaviour
         }
         
         _startPosition = transform.position;
+        _restartAction = InputSystem.actions.FindAction("Jump", true);
     }
 
     private void Update()
     {
         TimePlayed += Time.deltaTime;
+
+        if (Health <= 0 && _restartAction.WasPressedThisFrame())
+        {
+            Time.timeScale = 1;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
     
     public void TakeDamage(int amount)
@@ -47,6 +58,12 @@ public class Player : MonoBehaviour
         Health -= amount;
         UpdateHealthUi();
         _lastTimeTakenDamage = Time.time;
+
+        if (Health <= 0)
+        {
+            gameOverUi.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 
     public void Respawn()
