@@ -7,6 +7,10 @@ public enum ItemType
     Banana,
     Key,
     Money,
+    FlipPhone,
+    NokiaPhone,
+    Sandwich,
+    Bottle,
     All,
 }
 

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ee8df8009525484eacd46233852650b, type: 3}
-  m_Name: All
+  m_Name: Nokia 1
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  type: 4
-  spawnWeight: 0
+  type: 6
+  spawnWeight: 5
   prefab: {fileID: 0}
-  icon: {fileID: 2800000, guid: 4fe71f70ba4c8dc42b92c901fa667a3a, type: 3}
-  score: 1
+  icon: {fileID: 0}
+  score: 10

@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ee8df8009525484eacd46233852650b, type: 3}
-  m_Name: All
+  m_Name: Money
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  type: 4
-  spawnWeight: 0
-  prefab: {fileID: 0}
-  icon: {fileID: 2800000, guid: 4fe71f70ba4c8dc42b92c901fa667a3a, type: 3}
-  score: 1
+  type: 3
+  spawnWeight: 7
+  prefab: {fileID: 29821676375802365, guid: a994e9e17a3af7b42a72e628d5378d56, type: 3}
+  icon: {fileID: 0}
+  score: 5

@@ -649,7 +649,7 @@ MonoBehaviour:
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 3
-  m_Spacing: 10
+  m_Spacing: 0
   m_ChildForceExpandWidth: 0
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
@@ -1222,6 +1222,26 @@ PrefabInstance:
     - target: {fileID: 3024743451328723969, guid: 3be724502195274459792c6ce9888d27, type: 3}
       propertyPath: m_Name
       value: ZooLevelBlueprint
+      objectReference: {fileID: 0}
+    - target: {fileID: 4320413549732228125, guid: 3be724502195274459792c6ce9888d27, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5020079362032265234, guid: 3be724502195274459792c6ce9888d27, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6927850802294196258, guid: 3be724502195274459792c6ce9888d27, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7347231838052530846, guid: 3be724502195274459792c6ce9888d27, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538040750944579042, guid: 3be724502195274459792c6ce9888d27, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8837130454165918946, guid: 3be724502195274459792c6ce9888d27, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2358,6 +2378,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 371031163016425914, guid: 8042a1bab46e243468c2629e732bba11, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2415898325095577272, guid: 8042a1bab46e243468c2629e732bba11, type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2953639618571362077, guid: 8042a1bab46e243468c2629e732bba11, type: 3}
@@ -3635,7 +3659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cc51ef13ad07f545b5773cece205ac2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VisitorSpawner
-  minimumSpawnDelay: 0.5
+  minimumSpawnDelay: 2
   visitorCountTarget:
     serializedVersion: 2
     m_Curve:
