@@ -135,8 +135,8 @@ MonoBehaviour:
   agentPriorityRange: {x: 20, y: 100}
   timeUntilDetected: 2
   timeUntilResumeAfterDetected: 3
-  detectionMultiplierIfHoldingItem: 2
-  detectionCooldownMultiplier: 0.5
+  detectionMultiplierIfHoldingItem: 1
+  detectionCooldownMultiplier: 0.25
   detectionConeScaleX:
     serializedVersion: 2
     m_Curve:

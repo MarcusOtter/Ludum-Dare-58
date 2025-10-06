@@ -1,7 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 [System.Serializable]
 public enum VisitorType
@@ -51,7 +54,7 @@ public class Visitor : MonoBehaviour
     private int _currentWaypointIndex;
     private float _waitTimer;
     private float _timeSeen;
-    private bool _isDetected;
+    private bool _isInterrupted;
     
     private float DetectionMeter => Mathf.Clamp01(_timeSeen / timeUntilDetected);
     
@@ -126,17 +129,38 @@ public class Visitor : MonoBehaviour
         HeldItem = ItemType.None;
     }
 
+    public void Interrupt(float time, Vector3? lookAtPosition = null, bool disableCone = false, Action onUninterrupted = null )
+    {
+        _isInterrupted = true;
+        _agent.isStopped = true;
+        _detectionConeRenderer.enabled = !disableCone;
+        
+        if (lookAtPosition.HasValue)
+        {
+            _agent.transform.forward = (lookAtPosition.Value - transform.position).With(y: 0);
+        }
+        
+        this.SetTimeout(time, () =>
+        {
+            _isInterrupted = false;
+            _agent.isStopped = false;
+            _timeSeen = 0;
+            _detectionConeRenderer.enabled = true;
+            onUninterrupted?.Invoke();
+        });
+    }
+
     private void UpdateDetectionBehavior()
     {
+        if (_isInterrupted)
+        {
+            return;
+        }
+        
         _detectionConeRenderer.material.color = detectionConeColor.Evaluate(DetectionMeter);
         var newScaleX = detectionConeScaleX.Evaluate(DetectionMeter);
         var newScaleZ = detectionConeScaleZ.Evaluate(DetectionMeter);
         detectionCone.localScale = detectionCone.localScale.With(x: newScaleX, z: newScaleZ);
-
-        if (_isDetected)
-        {
-            return;
-        }
         
         if (!_detectedParts.Any() || _detectedParts.All(part => part.IsSafe))
         {
@@ -151,20 +175,12 @@ public class Visitor : MonoBehaviour
         
         if (_timeSeen >= timeUntilDetected)
         {
-            _agent.isStopped = true;
-            _agent.transform.forward = (_player.transform.position - transform.position).With(y: 0);
+            Interrupt(timeUntilResumeAfterDetected, _player.transform.position, onUninterrupted: () => _player.SetStunned(false));
+            
             _hand.DropItem();
             _player.SetStunned(true);
             _player.TakeDamage(1);
             _player.Respawn();
-            _isDetected = true;
-            this.SetTimeout(timeUntilResumeAfterDetected, () =>
-            {
-                _isDetected = false;
-                _agent.isStopped = false;
-                _timeSeen = 0;
-                _player.SetStunned(false);
-            });
         }
     }
     

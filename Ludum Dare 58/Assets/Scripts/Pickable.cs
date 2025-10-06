@@ -1,21 +1,22 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Pickable : MonoBehaviour
 {
     public Item Item => item;
     
-    [SerializeField] private Rigidbody rb;
-    [SerializeField] private Collider coll;
+    [SerializeField] [CanBeNull] private Rigidbody rb;
+    [SerializeField] [CanBeNull] private Collider coll;
     [SerializeField] private Item item;
     
     private Transform _target;
     
     private void Update()
     {
-        if (!_target)
+        if (!_target || !rb)
         {
             return;
-        }    
+        }
         
         rb.transform.position = _target.position;
         rb.transform.rotation = _target.rotation;
@@ -23,6 +24,11 @@ public class Pickable : MonoBehaviour
 
     public void PickUp(Transform parent)
     {
+        if (!rb || !coll)
+        {
+            return;
+        }
+        
         if (_target)
         {
             var visitor = _target.GetComponentInParent<Visitor>();
