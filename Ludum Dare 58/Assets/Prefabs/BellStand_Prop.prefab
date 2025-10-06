@@ -9,6 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4171450226816908380}
+  - component: {fileID: 8555399436491346682}
+  - component: {fileID: 7864387474161415065}
   m_Layer: 0
   m_Name: BellStand_Prop
   m_TagString: Untagged
@@ -32,6 +34,44 @@ Transform:
   - {fileID: 4036178186462786805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &8555399436491346682
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031537971845434162}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &7864387474161415065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2031537971845434162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d8471479b1f92044b7b55dea17a44bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Distraction
+  interruptDuration: 3
+  cooldown: 0.3
+  destroyAfterUse: 0
+  triggerMechanic: 2
+  radius: 10
 --- !u!1001 &4578432184493675294
 PrefabInstance:
   m_ObjectHideFlags: 0

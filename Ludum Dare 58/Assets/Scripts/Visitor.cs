@@ -131,6 +131,11 @@ public class Visitor : MonoBehaviour
 
     public void Interrupt(float time, Vector3? lookAtPosition = null, bool disableCone = false, Action onUninterrupted = null )
     {
+        if (_isInterrupted)
+        {
+            return;
+        }
+        
         _isInterrupted = true;
         _agent.isStopped = true;
         _detectionConeRenderer.enabled = !disableCone;
