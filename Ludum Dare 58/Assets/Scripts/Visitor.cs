@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -93,7 +92,7 @@ public class Visitor : MonoBehaviour
 
         if (pickRandomWaypoint)
         {
-            transform.position = _wayPoints[Random.Range(0, _wayPoints.Length)];   
+            // _currentWaypointIndex = Random.Range(0, _wayPoints.Length);   
         }
         else
         {
