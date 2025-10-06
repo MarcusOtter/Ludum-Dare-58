@@ -83,6 +83,15 @@ public class Hand : MonoBehaviour
         }
     }
     
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Safe"))
+        {
+            IsSafe = true;
+        }
+    }
+
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Safe"))

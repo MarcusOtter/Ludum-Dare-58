@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(NavMeshAgent))]
 public class Visitor : MonoBehaviour
@@ -28,15 +27,16 @@ public class Visitor : MonoBehaviour
     [SerializeField] private Gradient detectionConeColor;
     
     private NavMeshAgent _agent;
-    private Hand _seenHand;
     private MeshRenderer _detectionConeRenderer;
     private Player _player;
+    private Hand _hand;
     
     private Vector3[] _wayPoints;
     private int _currentWaypointIndex;
     private float _waitTimer;
     private float _timeSeen;
     private bool _isDetected;
+    private bool _isSeeingPlayer;
     
     private float DetectionMeter => Mathf.Clamp01(_timeSeen / timeUntilDetected);
     
@@ -44,6 +44,7 @@ public class Visitor : MonoBehaviour
     {
         _agent = GetComponent<NavMeshAgent>();
         _player = FindFirstObjectByType<Player>();
+        _hand = FindFirstObjectByType<Hand>();
         _detectionConeRenderer = detectionCone.GetComponentInChildren<MeshRenderer>();
         
         _agent.avoidancePriority = Random.Range(agentPriorityRange.x, agentPriorityRange.y);
@@ -112,22 +113,22 @@ public class Visitor : MonoBehaviour
             return;
         }
         
-        if (!_seenHand || _seenHand.IsSafe)
+        if (!_isSeeingPlayer || _hand.IsSafe)
         {
             _timeSeen = Mathf.Max(_timeSeen - Time.deltaTime * detectionCooldownMultiplier, 0);
             return;
         }
         
-        if (!_seenHand.IsSafe)
+        if (!_hand.IsSafe)
         {
-            _timeSeen += _seenHand.IsHoldingItem ? Time.deltaTime * detectionMultiplierIfHoldingItem : Time.deltaTime;
+            _timeSeen += _hand.IsHoldingItem ? Time.deltaTime * detectionMultiplierIfHoldingItem : Time.deltaTime;
         }
         
         if (_timeSeen >= timeUntilDetected)
         {
             _agent.isStopped = true;
             _agent.transform.forward = (_player.transform.position - transform.position).With(y: 0);
-            _seenHand.DropItem();
+            _hand.DropItem();
             _player.SetStunned(true);
             _player.TakeDamage(1);
             _isDetected = true;
@@ -193,24 +194,19 @@ public class Visitor : MonoBehaviour
         return true;
     }
     
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if (!other.TryGetComponent<Hand>(out var hand))
+        if (other.CompareTag("Player"))
         {
-            return;
+            _isSeeingPlayer = true;
         }
-        print(other.name);
-
-        _seenHand = hand;
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.TryGetComponent<Hand>(out _))
+        if (other.CompareTag("Player"))
         {
-            return;
+            _isSeeingPlayer = false;
         }
-
-        _seenHand = null;
     }
 }
