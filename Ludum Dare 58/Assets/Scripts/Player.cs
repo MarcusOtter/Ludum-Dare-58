@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     
     private void Awake()
     {
+        TimePlayed = 0;
         Health = startingHealth;
         for (var i = 0; i < startingHealth; i++)
         {

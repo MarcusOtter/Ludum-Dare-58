@@ -24,8 +24,8 @@ public class ItemReceiver : MonoBehaviour
     
     private void Awake()
     {
-        UpdateUI();
         _player = FindFirstObjectByType<Player>();
+        UpdateUI();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -42,7 +42,10 @@ public class ItemReceiver : MonoBehaviour
         
         var pickable = hand.DropItem();
         _currentAmount++;
-        _player.AddScore(pickable.Item.score);
+        if (isPoints)
+        {
+            _player.AddScore(pickable.Item.score);
+        }
         UpdateUI();
 
         if (_currentAmount >= requiredAmount)
@@ -59,7 +62,7 @@ public class ItemReceiver : MonoBehaviour
 
     private void UpdateUI()
     {
-        progressText.text = isPoints ? $"{_currentAmount} pts" : $"{_currentAmount}/{requiredAmount}";
+        progressText.text = isPoints ? $"{_player.Score} pts" : $"{_currentAmount}/{requiredAmount}";
         iconSlot.texture = wantedItem.icon;
     }
 }
