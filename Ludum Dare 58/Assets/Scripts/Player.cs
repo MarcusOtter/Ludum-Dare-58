@@ -4,6 +4,7 @@ public class Player : MonoBehaviour
 {
     public int Health { get; private set; }
     public bool IsStunned { get; private set; }
+    public int Score { get; private set; }
 
     [Header("Settings")]
     [SerializeField] private int startingHealth = 3;
@@ -43,6 +44,11 @@ public class Player : MonoBehaviour
     public void Respawn()
     {
         transform.position = _startPosition;
+    }
+
+    public void AddScore(int amount)
+    {
+        Score += amount;
     }
 
     private void UpdateHealthUi()

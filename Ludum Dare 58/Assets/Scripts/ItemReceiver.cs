@@ -8,6 +8,7 @@ public class ItemReceiver : MonoBehaviour
     [Header("Settings")]
     [SerializeField] private Item wantedItem;
     [SerializeField] private int requiredAmount;
+    [SerializeField] private bool isPoints;
     
     [Header("References")]
     [SerializeField] private TextMeshProUGUI progressText;
@@ -19,9 +20,12 @@ public class ItemReceiver : MonoBehaviour
     
     private int _currentAmount;
 
+    private Player _player;
+    
     private void Awake()
     {
         UpdateUI();
+        _player = FindFirstObjectByType<Player>();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -31,13 +35,14 @@ public class ItemReceiver : MonoBehaviour
             return;
         }
 
-        if (hand.HeldItemType == ItemType.None || hand.HeldItemType != wantedItem.type)
+        if (hand.HeldItemType == ItemType.None || (wantedItem.type != ItemType.All && hand.HeldItemType != wantedItem.type))
         {
             return;
         }
         
         var pickable = hand.DropItem();
         _currentAmount++;
+        _player.AddScore(pickable.Item.score);
         UpdateUI();
 
         if (_currentAmount >= requiredAmount)
@@ -54,7 +59,7 @@ public class ItemReceiver : MonoBehaviour
 
     private void UpdateUI()
     {
-        progressText.text = $"{_currentAmount}/{requiredAmount}";
+        progressText.text = isPoints ? $"{_currentAmount} pts" : $"{_currentAmount}/{requiredAmount}";
         iconSlot.texture = wantedItem.icon;
     }
 }

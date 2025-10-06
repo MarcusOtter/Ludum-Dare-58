@@ -7,6 +7,7 @@ public enum ItemType
     Banana,
     Key,
     Money,
+    All,
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]
@@ -16,4 +17,5 @@ public class Item : ScriptableObject
     public int spawnWeight;
     public Pickable prefab;
     public Texture icon;
+    public int score = 1;
 }
