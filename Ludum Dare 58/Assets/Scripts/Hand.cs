@@ -8,11 +8,10 @@ public class Hand : MonoBehaviour
 {
     public Player player;
     
-    internal bool IsInJail = true;
+    internal bool IsSafe = true;
     internal bool IsHoldingItem => _heldPickable;
     internal ItemType HeldItemType => _heldPickable?.Item.type ?? ItemType.None;
     
-    [SerializeField] private Collider insideJailTrigger;
     [SerializeField] private UnityEvent onHandPressed;
     [SerializeField] private UnityEvent onHandReleased;
 
@@ -78,17 +77,17 @@ public class Hand : MonoBehaviour
     {
         TryPickUp(other);
 
-        if (other == insideJailTrigger)
+        if (other.CompareTag("Safe"))
         {
-            IsInJail = true;
+            IsSafe = true;
         }
     }
     
     private void OnTriggerExit(Collider other)
     {
-        if (other == insideJailTrigger)
+        if (other.CompareTag("Safe"))
         {
-            IsInJail = false;
+            IsSafe = false;
         }
     }
 }

@@ -112,13 +112,13 @@ public class Visitor : MonoBehaviour
             return;
         }
         
-        if (!_seenHand || _seenHand.IsInJail)
+        if (!_seenHand || _seenHand.IsSafe)
         {
             _timeSeen = Mathf.Max(_timeSeen - Time.deltaTime * detectionCooldownMultiplier, 0);
             return;
         }
         
-        if (!_seenHand.IsInJail)
+        if (!_seenHand.IsSafe)
         {
             _timeSeen += _seenHand.IsHoldingItem ? Time.deltaTime * detectionMultiplierIfHoldingItem : Time.deltaTime;
         }
@@ -199,7 +199,8 @@ public class Visitor : MonoBehaviour
         {
             return;
         }
-        
+        print(other.name);
+
         _seenHand = hand;
     }
 
