@@ -3,16 +3,28 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
+[System.Serializable]
+public enum VisitorType
+{
+    Visitor,
+    Guard,
+}
+
 [RequireComponent(typeof(NavMeshAgent))]
 public class Visitor : MonoBehaviour
 {
     public ItemType HeldItem { get; private set; } = ItemType.None;
     
+    [Header("Settings")]
+    [SerializeField] private VisitorType visitorType;
+    [SerializeField] private Item startingItem;
+    
     [Header("References")]
     [SerializeField] private Transform detectionCone;
     [SerializeField] private Transform exclamationPoint;
     [SerializeField] private Transform pocketSlot;
-    [SerializeField] private Item startingItem;
+    [SerializeField] private MeshRenderer shirtRenderer;
+    [SerializeField] private Material[] shirtColors;
     
     [Header("Path settings")]
     [SerializeField] private Transform path;
@@ -33,7 +45,7 @@ public class Visitor : MonoBehaviour
     private MeshRenderer _detectionConeRenderer;
     private Player _player;
     private Hand _hand;
-    private HashSet<PlayerPart> _detectedParts = new();
+    private readonly HashSet<PlayerPart> _detectedParts = new();
     
     private Vector3[] _wayPoints;
     private int _currentWaypointIndex;
@@ -56,6 +68,11 @@ public class Visitor : MonoBehaviour
         if (startingItem)
         {
             SpawnAndHoldItem(startingItem);
+        }
+
+        if (visitorType == VisitorType.Visitor)
+        {
+            shirtRenderer.material = shirtColors[Random.Range(0, shirtColors.Length)];
         }
         
         if (!path)
