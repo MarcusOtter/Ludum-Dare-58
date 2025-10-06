@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Item
   type: 7
   spawnWeight: 5
-  prefab: {fileID: 0}
+  prefab: {fileID: 29821676375802365, guid: 5a74641991b7def48a7c2295faff6291, type: 3}
   icon: {fileID: 0}
   score: 3

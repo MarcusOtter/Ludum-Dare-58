@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ee8df8009525484eacd46233852650b, type: 3}
-  m_Name: Nokia
+  m_Name: Sandwich
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  type: 5
-  spawnWeight: 2
-  prefab: {fileID: 29821676375802365, guid: 2f8140a4f234cd7438a345f85d413983, type: 3}
+  type: 6
+  spawnWeight: 5
+  prefab: {fileID: 29821676375802365, guid: 3d1fd91fc407f3c4aa8c8b5eee77d4f5, type: 3}
   icon: {fileID: 0}
-  score: 15
+  score: 8

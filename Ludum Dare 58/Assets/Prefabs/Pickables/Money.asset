@@ -15,5 +15,5 @@ MonoBehaviour:
   type: 3
   spawnWeight: 7
   prefab: {fileID: 29821676375802365, guid: a994e9e17a3af7b42a72e628d5378d56, type: 3}
-  icon: {fileID: 0}
+  icon: {fileID: 2800000, guid: 8f6442972c70ded4ea95b26f2a3a558d, type: 3}
   score: 5
