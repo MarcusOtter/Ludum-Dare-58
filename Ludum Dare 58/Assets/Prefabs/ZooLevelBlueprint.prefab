@@ -2803,7 +2803,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8103669674071581, guid: b3515ea171ac3c442885895041e822a6, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.9063079
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8103669674071581, guid: b3515ea171ac3c442885895041e822a6, type: 3}
       propertyPath: m_LocalRotation.x
@@ -2811,7 +2811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8103669674071581, guid: b3515ea171ac3c442885895041e822a6, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.42261827
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8103669674071581, guid: b3515ea171ac3c442885895041e822a6, type: 3}
       propertyPath: m_LocalRotation.z
@@ -2819,7 +2819,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8103669674071581, guid: b3515ea171ac3c442885895041e822a6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 50
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 189039360172654302, guid: b3515ea171ac3c442885895041e822a6, type: 3}
+      propertyPath: onAllItemsReceived.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 8533543624961939950}
+    - target: {fileID: 189039360172654302, guid: b3515ea171ac3c442885895041e822a6, type: 3}
+      propertyPath: onAllItemsReceived.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: set_isKinematic
       objectReference: {fileID: 0}
     - target: {fileID: 586153364110620078, guid: b3515ea171ac3c442885895041e822a6, type: 3}
       propertyPath: m_Name
@@ -2847,7 +2855,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: d63facdeb650f4440bb15797cb59293f, type: 2}
     - target: {fileID: 4893954961696432634, guid: b3515ea171ac3c442885895041e822a6, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5853969265189078265, guid: b3515ea171ac3c442885895041e822a6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2925,7 +2933,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 4
   m_CollisionDetection: 0

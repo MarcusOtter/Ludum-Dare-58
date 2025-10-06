@@ -12,6 +12,7 @@ public class Visitor : MonoBehaviour
     [SerializeField] private Transform detectionCone;
     [SerializeField] private Transform exclamationPoint;
     [SerializeField] private Transform pocketSlot;
+    [SerializeField] private Item startingItem;
     
     [Header("Path settings")]
     [SerializeField] private Transform path;
@@ -52,6 +53,11 @@ public class Visitor : MonoBehaviour
         _agent.avoidancePriority = Random.Range(agentPriorityRange.x, agentPriorityRange.y);
         UpdateDetectionBehavior();
 
+        if (startingItem)
+        {
+            SpawnAndHoldItem(startingItem);
+        }
+        
         if (!path)
         {
             return;

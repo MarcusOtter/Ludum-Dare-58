@@ -5,6 +5,8 @@ public enum ItemType
 {
     None,
     Banana,
+    Key,
+    Money,
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "Scriptable Objects/Item")]

@@ -150,7 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemSpawner
   itemsToSpawn:
   - {fileID: 11400000, guid: fb81b9c778b6a5642b00ed071e64d189, type: 2}
-  spawnInterval: 10
+  spawnInterval: 1
 --- !u!4 &151792
 Transform:
   m_ObjectHideFlags: 0
@@ -2380,6 +2380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   startingHealth: 3
+  invulnerabilityTime: 2
   healthUiContainer: {fileID: 178174612}
   heartUiPrefab: {fileID: 4046531563864478739, guid: 94becb19d6096ab44a3df0353c91b354, type: 3}
 --- !u!1 &917175994
@@ -4605,6 +4606,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MONKEY_Prop
       objectReference: {fileID: 0}
+    - target: {fileID: 908037493357874246, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4244510403999902520, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4687167113780134553, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4842890475371290573, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
       propertyPath: m_Height
       value: 2.1
@@ -4652,6 +4665,18 @@ PrefabInstance:
     - target: {fileID: 5897836084183762945, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243690160456226841, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7967991773218997481, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8930530221011252441, guid: e63e59093f3812143ac4fc331ffa2dd0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4919,6 +4944,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1411549418}
     - target: {fileID: 7706103214291333399, guid: 6d57d2d016cf8044e91767d19f95978d, type: 3}
+      propertyPath: startingItem
+      value: 
+      objectReference: {fileID: 11400000, guid: febeec7702d5b644cbc52fdd60598912, type: 2}
+    - target: {fileID: 7706103214291333399, guid: 6d57d2d016cf8044e91767d19f95978d, type: 3}
       propertyPath: onDetected.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -5011,6 +5040,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item receiver
       objectReference: {fileID: 0}
+    - target: {fileID: 3974603036134686965, guid: 8042a1bab46e243468c2629e732bba11, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5101,5 +5134,5 @@ SceneRoots:
   - {fileID: 1818403369}
   - {fileID: 1031395386}
   - {fileID: 151792}
-  - {fileID: 3364198758867644919}
   - {fileID: 286022574}
+  - {fileID: 3364198758867644919}

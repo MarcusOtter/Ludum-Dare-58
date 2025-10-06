@@ -18,6 +18,7 @@ public class Pickable : MonoBehaviour
         }    
         
         rb.transform.position = _target.position;
+        rb.transform.rotation = _target.rotation;
     }
 
     public void PickUp(Transform parent)
@@ -36,6 +37,11 @@ public class Pickable : MonoBehaviour
     public void Drop()
     {
         _target = null;
+        if (!rb || !coll)
+        {
+            return;
+        }
+        
         rb.isKinematic = false;
         coll.enabled = true;
     }

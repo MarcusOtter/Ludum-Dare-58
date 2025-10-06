@@ -117,6 +117,7 @@ MonoBehaviour:
   detectionCone: {fileID: 2970484497206935182}
   exclamationPoint: {fileID: 0}
   pocketSlot: {fileID: 4056946131510479032}
+  startingItem: {fileID: 0}
   path: {fileID: 0}
   waitTimeRange: {x: 2, y: 5}
   pickRandomWaypoint: 1
