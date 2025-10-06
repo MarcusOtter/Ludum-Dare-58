@@ -377,8 +377,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": 186.99998474121095,
-            "y": 700.9999389648438
+            "x": 446.00006103515627,
+            "y": 705.0000610351563
         },
         "m_Blocks": [
             {
@@ -394,8 +394,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 186.99998474121095,
-            "y": 900.9998779296875
+            "x": 446.00006103515627,
+            "y": 905.0000610351563
         },
         "m_Blocks": [
             {
@@ -2141,8 +2141,8 @@
     "m_CustomSlotLabel": "",
     "m_DismissedVersion": 0,
     "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "overrideHLSLDeclaration": true,
+    "hlslDeclarationOverride": 2,
     "m_Hidden": false,
     "m_PerRendererData": false,
     "m_customAttributes": [],
@@ -2150,7 +2150,7 @@
         "r": 1.0,
         "g": 1.0,
         "b": 1.0,
-        "a": 0.0
+        "a": 1.0
     },
     "isMainColor": false,
     "m_ColorMode": 0
