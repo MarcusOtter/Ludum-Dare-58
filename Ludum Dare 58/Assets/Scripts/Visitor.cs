@@ -77,26 +77,9 @@ public class Visitor : MonoBehaviour
             shirtRenderer.material = shirtColors[Random.Range(0, shirtColors.Length)];
         }
         
-        if (!path)
+        if (path)
         {
-            return;
-        }
-        
-        _wayPoints = new Vector3[path.childCount];
-        var i = 0;
-        foreach (Transform child in path)
-        {
-            _wayPoints[i] = child.position;
-            i++;
-        }
-
-        if (pickRandomWaypoint)
-        {
-            // _currentWaypointIndex = Random.Range(0, _wayPoints.Length);   
-        }
-        else
-        {
-            transform.position = _wayPoints[0];
+            SetWaypoints(path);
         }
     }
     
@@ -106,6 +89,17 @@ public class Visitor : MonoBehaviour
         UpdateWaypoints();
     }
 
+    public void SetWaypoints(Transform newPath)
+    {
+        _wayPoints = new Vector3[path.childCount];
+        var i = 0;
+        foreach (Transform child in newPath)
+        {
+            _wayPoints[i] = child.position;
+            i++;
+        }
+    }
+    
     public void SpawnAndHoldItem(Item item)
     {
         if (HeldItem != ItemType.None)
@@ -201,6 +195,11 @@ public class Visitor : MonoBehaviour
             return;
         }
 
+        if (_wayPoints == null || _wayPoints.Length == 0)
+        {
+            return;
+        }
+        
         if (pickRandomWaypoint)
         {
             _currentWaypointIndex = Random.Range(0, _wayPoints.Length);

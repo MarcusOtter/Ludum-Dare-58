@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public static float TimePlayed { get; private set; } 
+        
     public int Health { get; private set; }
     public bool IsStunned { get; private set; }
     public int Score { get; private set; }
@@ -29,6 +31,11 @@ public class Player : MonoBehaviour
         _startPosition = transform.position;
     }
 
+    private void Update()
+    {
+        TimePlayed += Time.deltaTime;
+    }
+    
     public void TakeDamage(int amount)
     {
         if (Time.time < _lastTimeTakenDamage + invulnerabilityTime)
