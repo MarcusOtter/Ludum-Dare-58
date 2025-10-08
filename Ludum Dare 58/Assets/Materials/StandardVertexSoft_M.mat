@@ -64,7 +64,7 @@ Material:
     - _Shades: 0.4
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _Color_Tint: {r: 1, g: 1, b: 1, a: 0}
+    - _Color_Tint: {r: 1, g: 1, b: 1, a: 1}
     - _LightColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
